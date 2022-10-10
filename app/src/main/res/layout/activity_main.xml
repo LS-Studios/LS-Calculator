@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_main_4"
+    app:layoutDescription="@xml/activity_main_scene">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:addStatesFromChildren="false"
+        android:background="@color/dark_main_1"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:id="@+id/calculationTextScroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginHorizontal="5dp"
+                android:overScrollMode="never"
+                android:scrollX="0dp"
+                android:scrollbars="none">
+
+                <EditText
+                    android:id="@+id/calculationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:background="@null"
+                    android:inputType="textNoSuggestions"
+                    android:letterSpacing="0.05"
+                    android:scrollHorizontally="true"
+                    android:textColor="#CCCCCC"
+                    android:textSize="60dp" />
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:id="@+id/resultTextScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/resultText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:alpha=".8"
+                        android:letterSpacing="0.1"
+                        android:textColor="@color/dark_text"
+                        android:textIsSelectable="true"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/previewFunAndVar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:weightSum="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/funValBtn1"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addAns"
+                android:text="Ans"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn2"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="√"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn3"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addLeftAndRightOperator"
+                android:text="^"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/funValBtn4"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addSign"
+                android:text="π"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/expandetFunAndVar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:gravity="top"
+        android:orientation="vertical"
+        android:weightSum="3"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/previewFunAndVar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/funValBtn5"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addLeftOperator"
+                android:text="!"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn6"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="ln"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn7"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="log"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn8"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addSign"
+                android:text="e"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/funValBtn9"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="sin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn10"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="cos"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn11"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="tan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/funValBtn12"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="asin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn13"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="acos"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/funValBtn14"
+                style="com.google.android.material.button.MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_2"
+                android:onClick="addRightOperator"
+                android:text="atan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/text_1"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/previewFunAndVar">
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/dragBar"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/dark_main_1" />
+
+        <LinearLayout
+            android:id="@+id/numbers"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:layout_marginTop="104dp"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:weightSum="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dragBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <Button
+                    android:id="@+id/calculationAreaACBtn"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/green"
+                    android:onClick="deleteAll"
+                    android:text="AC"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_2"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaOperationBtn1"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="addBracket"
+                    android:text="( )"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_2"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaOperationBtn2"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="addSign"
+                    android:text="%"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_2"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaOperationBtn3"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="addLeftAndRightOperator"
+                    android:text="÷"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_2"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn7"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="7"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn8"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="8"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn9"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="9"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaOperationBtn4"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="addLeftAndRightOperator"
+                    android:text="×"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/text_2"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn4"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="4"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn5"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="5"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn6"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="6"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaOperationBtn5"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="addLeftAndRightOperator"
+                    android:text="-"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_2"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn1"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn2"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn3"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="3"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaOperationBtn6"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue"
+                    android:onClick="addLeftAndRightOperator"
+                    android:text="+"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_2"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <Button
+                    android:id="@+id/calculationAreaNumberBtn0"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addSign"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaCommaBtn"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="addDot"
+                    android:text="."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaDELBtn"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/dark_main_2"
+                    android:onClick="deleteChar"
+                    android:text="DEL"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_1"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/calculationAreaCalculateBtn"
+                    style="com.google.android.material.button.MaterialButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/green"
+                    android:onClick="calculate"
+                    android:text="="
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_2"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

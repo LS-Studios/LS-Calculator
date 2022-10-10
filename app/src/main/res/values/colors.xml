@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="main_1">#2C3A47</color>
+    <color name="main_2">#141A20</color>
+    <color name="main_3">#0C1013</color>
+
+    <color name="button_1">#59BD5D</color>
+    <color name="button_2">#4FA8CC</color>
+    <color name="button_3">#CACACA</color>
+    <color name="button_4">#212A33</color>
+    <color name="button_5">#BD5959</color>
+
+    <color name="text_1">#CCCCCC</color>
+    <color name="text_2">#191919</color>
+
+    //Dark
+    <color name="dark_main_1">#2C3A47</color>
+    <color name="dark_main_2">#212A33</color>
+    <color name="dark_main_3">#141A20</color>
+    <color name="dark_main_4">#0C1013</color>
+
+    <color name="dark_text">#CCCCCC</color>
+    <color name="dark_divider">#1AFFFFFF</color>
+
+    //Bright
+    <color name="bright_main_1">#DBDBDB</color>
+    <color name="bright_main_2">#BCBCBC</color>
+    <color name="bright_main_3">#A1A1A1</color>
+    <color name="bright_main_4">#818181</color>
+    <color name="bright_main_4_alpha">#99818181</color>
+
+    <color name="bright_text">#353535</color>
+    <color name="bright_divider">#1A000000</color>
+
+    //Other colors
+    <color name="green">#708F7C</color>
+    <color name="blue">#628796</color>
+    <color name="red">#BD5959</color>
+</resources>

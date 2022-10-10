@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popupYesNoCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/dark_main_2"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/popupQuestionNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yes no dialog"
+            android:textAlignment="center"
+            android:textColor="@color/dark_text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/popupYesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2.5dp"
+                android:layout_weight="10"
+                android:backgroundTint="@color/dark_main_1"
+                android:text="Yes"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_text" />
+
+            <Button
+                android:id="@+id/popupNoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.5dp"
+                android:layout_weight="10"
+                android:backgroundTint="@color/dark_main_1"
+                android:text="No"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_text" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

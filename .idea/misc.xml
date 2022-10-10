@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.286" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/dragbar.xml" value="0.286" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/ic_launcher_background.xml" value="0.286" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/icon_foreground.xml" value="0.286" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/options_menu_dark.xml" value="0.286" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/options_menue_bright.xml" value="0.286" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout-land/activity_main.xml" value="0.33" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/history_card_dialogue.xml" value="0.25" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/history_data_set.xml" value="0.18802083333333333" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/popup_info.xml" value="0.33" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/popup_yes_no.xml" value="0.5" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/menu/option_menue.xml" value="0.33" />
+        <entry key="..\:/Users/stubb/AndroidStudioProjects/Calculater/Taschenrechner/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/stubb/AndroidStudioProjects/Calculater/Taschenrechner/app/src/main/res/layout/history_card_dialogue.xml" value="0.36684782608695654" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

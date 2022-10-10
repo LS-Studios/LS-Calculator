@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.MyTaschenrechner.Dark" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:itemBackground">@color/dark_main_2</item>
+        <item name="actionOverflowMenuStyle">@style/Theme.MyTaschenrechner.Dark.PopUpBG</item>
+        <item name="actionOverflowButtonStyle">@style/Theme.MyTaschenrechner.Dark.PopUpIcon</item>
+    </style>
+
+    <style name="Theme.MyTaschenrechner.Dark.PopUpBG" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:popupBackground">@drawable/options_menu_dark</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:overlapAnchor" tools:ignore="NewApi">false</item>
+        <item name="android:dropDownVerticalOffset">-50dip</item>
+    </style>
+
+    <style name="Theme.MyTaschenrechner.Dark.PopUpIcon" parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="tint">@color/dark_text</item>
+    </style>
+</resources>
