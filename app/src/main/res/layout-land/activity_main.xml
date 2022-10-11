@@ -32,88 +32,73 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <HorizontalScrollView
-                android:id="@+id/calculationTextScroll"
+            <EditText
+                android:id="@+id/calculationText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:layout_marginHorizontal="5dp"
-                android:overScrollMode="never"
-                android:scrollX="0dp"
-                android:scrollbars="none">
+                android:layout_gravity="end"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:inputType="textNoSuggestions"
+                android:letterSpacing="0.05"
+                android:scrollHorizontally="true"
+                android:textAlignment="textEnd"
+                android:textColor="#CCCCCC"
+                android:textSize="40dp" />
 
-                <EditText
-                    android:id="@+id/calculationText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="8dp"
-                    android:autoSizeMaxTextSize="40sp"
-                    android:autoSizeTextType="uniform"
-                    android:background="@null"
-                    android:inputType="textNoSuggestions"
-                    android:letterSpacing="0.05"
-                    android:scrollHorizontally="true"
-                    android:textColor="@color/dark_text"
-                    android:textSize="40sp" />
-            </HorizontalScrollView>
-
-            <HorizontalScrollView
-                android:id="@+id/resultTextScroll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:scrollbars="none">
-
-                <TextView
-                    android:id="@+id/resultText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="8dp"
-                    android:alpha=".8"
-                    android:autoSizeMaxTextSize="36sp"
-                    android:autoSizeTextType="uniform"
-                    android:letterSpacing="0.1"
-                    android:textColor="@color/dark_text"
-                    android:textIsSelectable="true"
-                    android:textSize="36sp"
-                    android:textStyle="bold" />
-            </HorizontalScrollView>
+            <TextView
+                android:id="@+id/resultText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:alpha=".8"
+                android:autoSizeMaxTextSize="36dp"
+                android:autoSizeMinTextSize="15dp"
+                android:autoSizeStepGranularity="2dp"
+                android:autoSizeTextType="uniform"
+                android:gravity="end|center"
+                android:letterSpacing="0.1"
+                android:maxLines="1"
+                android:textAlignment="textEnd"
+                android:textColor="@color/dark_text"
+                android:textIsSelectable="true"
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="top"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:weightSum="2">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" >
 
-        <LinearLayout
-            android:id="@+id/funAndVar"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="4">
+            android:layout_weight="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/numbers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="6dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:weightSum="4">
+                android:weightSum="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <Button
                     android:id="@+id/funValBtn1"
@@ -184,219 +169,35 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:gravity="top"
                 android:orientation="horizontal"
-                android:weightSum="4">
-
-                <Button
-                    android:id="@+id/funValBtn5"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addLeftOperator"
-                    android:text="!"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/funValBtn6"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="ln"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/funValBtn7"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="log"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/funValBtn8"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addSign"
-                    android:text="e"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <Button
-                    android:id="@+id/funValBtn9"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="sin"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/funValBtn10"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="cos"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/funValBtn11"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="tan"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <Button
-                    android:id="@+id/funValBtn12"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="asin"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/funValBtn13"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="acos"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/funValBtn14"
-                    style="com.google.android.material.button.MaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:autoSizeMaxTextSize="28dp"
-                    android:autoSizeTextType="uniform"
-                    android:backgroundTint="@color/dark_main_2"
-                    android:onClick="addRightOperator"
-                    android:text="atan"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+                android:weightSum="3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/numbers"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:layout_marginTop="104dp"
             android:layout_weight="1"
             android:gravity="bottom"
             android:orientation="vertical"
             android:weightSum="4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dragBar">
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -774,7 +575,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

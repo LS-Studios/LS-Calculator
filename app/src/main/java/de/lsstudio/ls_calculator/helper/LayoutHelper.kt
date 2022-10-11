@@ -1,4 +1,4 @@
-package de.stubbe.helper
+package de.lsstudio.ls_calculator.helper
 
 import android.app.Activity
 import android.content.Context
@@ -9,19 +9,19 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.dolatkia.animatedThemeManager.ThemeManager
-import de.stubbe.R
-import de.stubbe.theme.MyAppTheme
+import de.lsstudio.ls_calculator.R
+import de.lsstudio.ls_calculator.theme.MyAppTheme
 
 @RequiresApi(Build.VERSION_CODES.N)
 class LayoutHelper {
 
-    companion object
-    {
+    companion object {
 
         @RequiresApi(Build.VERSION_CODES.N)
         fun createAllerDialog(layout: View, setUp: (AlertDialog) -> Unit) {
@@ -39,30 +39,7 @@ class LayoutHelper {
             alertDialog.show()
         }
 
-        fun createInfoDialog(activity: Activity, text: String) {
-            val layout = LayoutInflater.from(activity).inflate(R.layout.popup_info, null)
-
-            createAllerDialog(layout) { alertDialog ->
-                val nameText = layout.findViewById<TextView>(R.id.popupHelpNameText)
-                val closeBtn = layout.findViewById<Button>(R.id.poppupHelpCloseButton)
-
-                //Set color by theme
-                var myAppTheme = ThemeManager.instance.getCurrentTheme() as MyAppTheme
-
-                layout.findViewById<CardView>(R.id.popupHelpCard).setCardBackgroundColor(myAppTheme.main1Color())
-                layout.findViewById<TextView>(R.id.popupHelpNameText).setTextColor(myAppTheme.textColor())
-                closeBtn.backgroundTintList = ColorStateList.valueOf(myAppTheme.main2Color())
-                closeBtn.setTextColor(myAppTheme.textColor())
-
-                nameText.text = text
-
-                closeBtn.setOnClickListener {
-                    alertDialog.dismiss()
-                }
-            }
-        }
-
-        fun createYesNoDialog(context: Context, text: String, yesFunction: () -> Unit, noFunction: () -> Unit = fun() {}) {
+        fun createYesNoDialog(context: Context, text: String, yesFunction: () -> Unit, noFunction: () -> Unit = {}) {
             val layout = LayoutInflater.from(context).inflate(R.layout.popup_yes_no, null)
 
             createAllerDialog(layout) { alertDialog ->
@@ -96,6 +73,7 @@ class LayoutHelper {
                 }
             }
         }
+
     }
 
 }

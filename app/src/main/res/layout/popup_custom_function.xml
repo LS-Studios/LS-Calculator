@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/popupCustomFunctionCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/dark_main_2"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/popupCustomFunctionTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create custom function"
+            android:textAlignment="center"
+            android:textColor="@color/dark_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/popupCustomFunctionNameNameText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="Name:"
+                android:textAlignment="center"
+                android:textColor="@color/dark_text"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/popupCustomFunctionNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:autofillHints=""
+                android:backgroundTint="@color/dark_text"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/dark_text"
+                android:textColorHint="#66CCCCCC" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/popupCustomFunctionParameterNameText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Parameter name:"
+                android:textAlignment="center"
+                android:textColor="@color/dark_text"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/popupCustomFunctionParameterEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:backgroundTint="@color/dark_text"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textAlignment="center"
+                android:textColor="@color/dark_text"
+                android:textColorHint="#66CCCCCC" />
+
+            <Button
+                android:id="@+id/popupCustomFunctionAddParameterBtn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_1"
+                android:text="Add"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_text" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp">
+
+            <ScrollView
+                android:id="@+id/customLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="wrap"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.nex3z.flowlayout.FlowLayout
+                    android:id="@+id/customParameterFlowLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    app:flChildSpacing="40dp"
+                    app:flChildSpacingForLastRow="align">
+
+                </com.nex3z.flowlayout.FlowLayout>
+
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/popupCustomFunctionCancelBtn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_1"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_text" />
+
+            <Button
+                android:id="@+id/popupCustomFunctionContinueBtn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/dark_main_1"
+                android:text="Continue"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_text" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:gravity="top"
+    android:orientation="vertical"
+    android:weightSum="3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <Button
+            android:id="@+id/funValBtn1"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addLeftOperator"
+            android:text="!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/funValBtn2"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="ln"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/funValBtn3"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="log"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/funValBtn4"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addSign"
+            android:text="e"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/funValBtn5"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="sin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/funValBtn6"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="cos"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/funValBtn7"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="tan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/funValBtn8"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="asin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/funValBtn9"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="acos"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/funValBtn10"
+            style="com.google.android.material.button.MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dark_main_2"
+            android:onClick="addRightOperator"
+            android:text="atan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_1"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package de.stubbe.theme
+package de.lsstudio.ls_calculator.theme
 
 import com.dolatkia.animatedThemeManager.AppTheme
 

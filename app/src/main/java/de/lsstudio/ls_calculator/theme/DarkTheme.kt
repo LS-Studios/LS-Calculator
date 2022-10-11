@@ -1,9 +1,9 @@
-package de.stubbe.theme
+package de.lsstudio.ls_calculator.theme
 
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import de.stubbe.R
+import de.lsstudio.ls_calculator.R
 
 @RequiresApi(Build.VERSION_CODES.M)
 class DarkTheme(private val context: Context): MyAppTheme {

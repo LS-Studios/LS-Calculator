@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/customLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/customFlowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:flChildSpacing="40dp"
+        app:flChildSpacingForLastRow="align">
+
+    </com.nex3z.flowlayout.FlowLayout>
+
+</ScrollView>

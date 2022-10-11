@@ -9,12 +9,21 @@
         <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/icon_foreground.xml" value="0.286" />
         <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/options_menu_dark.xml" value="0.286" />
         <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/drawable/options_menue_bright.xml" value="0.286" />
-        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout-land/activity_main.xml" value="0.33" />
-        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout-land/activity_main.xml" value="0.25" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout-v26/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/fragment_customs.xml" value="0.3401268115942029" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/fragment_default_complex_operators.xml" value="0.3009833262077811" />
         <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/history_card_dialogue.xml" value="0.25" />
-        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/history_data_set.xml" value="0.18802083333333333" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/history_data_set.xml" value="0.33" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/popup_custom_function.xml" value="0.33" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/popup_custom_variable.xml" value="0.3009833262077811" />
         <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/popup_info.xml" value="0.33" />
         <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/popup_yes_no.xml" value="0.5" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/recycler_custom_row.xml" value="0.5" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/layout/recycler_custom_val_or_func.xml" value="0.3401268115942029" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/menu/create_function_options_menu.xml" value="0.3009833262077811" />
+        <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/menu/main_options_menu.xml" value="0.3009833262077811" />
         <entry key="..\:/Programmieren/Java und Kotlin/Projekte/AndroidStudio/TaschenrechnerProjekte/Calculater Done/Calculator/app/src/main/res/menu/option_menue.xml" value="0.33" />
         <entry key="..\:/Users/stubb/AndroidStudioProjects/Calculater/Taschenrechner/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/stubb/AndroidStudioProjects/Calculater/Taschenrechner/app/src/main/res/layout/history_card_dialogue.xml" value="0.36684782608695654" />

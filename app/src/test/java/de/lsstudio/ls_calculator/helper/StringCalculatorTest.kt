@@ -1,5 +1,4 @@
-package de.stubbe
-import de.stubbe.helper.StringCalculator
+package de.lsstudio.ls_calculator.helper
 import junit.framework.TestCase
 import org.junit.Test
 import java.lang.reflect.Method

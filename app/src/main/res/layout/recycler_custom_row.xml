@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customBtn"
+    style="com.google.android.material.button.MaterialButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_weight="1"
+    android:backgroundTint="@color/dark_main_2"
+    android:onClick="addAns"
+    android:text="Ans"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    android:textColor="@color/text_1"
+    android:textSize="20sp" />
