@@ -9,7 +9,6 @@ import de.lsstudio.ls_calculator.helper.StringCalculator.Operators.Companion.get
 import de.lsstudio.ls_calculator.helper.StringCalculator.Operators.Companion.getOperatorBySign
 import de.lsstudio.ls_calculator.helper.StringCalculator.Operators.Companion.isAnyOperator
 import de.lsstudio.ls_calculator.helper.StringCalculator.Operators.Companion.isRightAndLeftOperator
-import de.lsstudio.ls_calculator.helper.StringCalculator.Operators.Companion.operatorPositionWithHighestPriority
 import de.lsstudio.ls_calculator.helper.StringCalculator.Variables.Companion.getVariable
 import de.lsstudio.ls_calculator.helper.StringCalculator.Variables.Companion.isAnyVariable
 
@@ -35,11 +34,7 @@ import de.lsstudio.ls_calculator.helper.StringCalculator.Variables.Companion.isA
  *      - Invalid letters get removed
  *      - All methods are unit tested in [StringCalculatorTests]
  */
-class StringCalculator//Set additional variable and function list
-    (
-    newAdditionalVariables: List<Variable> = mutableListOf(),
-    newAdditionalFunctions: List<Function> = mutableListOf()
-) {
+class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(), newAdditionalFunctions: List<Function> = mutableListOf()) {
 
     /** Enum with valid operators
      *
@@ -60,35 +55,55 @@ class StringCalculator//Set additional variable and function list
         //Left operators
         Faculty("!", { a ->
             var factorial: Long = 1
-            for (i in a.toLong() downTo 2) { factorial *= i }
+            for (i in a.toLong() downTo 2) {
+                factorial *= i
+            }
             factorial.toDouble()
-        }, CalculationTyp.Left,4),
+        }, CalculationTyp.Left, 4),
 
         //Right operators
-        SquareRoot("√", {a -> sqrt(a) },
-            CalculationTyp.Right, 3),
-        LogarithmBaseE("ln", {a -> ln(a) },
-            CalculationTyp.Right,3),
-        LogarithmBase10("log", {a -> log10(a) },
-            CalculationTyp.Right,3),
-        Sine("sin", {a -> sin(a) },
-            CalculationTyp.Right,3),
-        ArcSine("asin", {a -> asin(a) },
-            CalculationTyp.Right,3),
-        Cosine("cos", { a -> cos(a) },
-            CalculationTyp.Right, 3),
-        ArcCosine("acos", { a -> acos(a) },
-            CalculationTyp.Right,3),
-        Tangent("tan", {a -> tan(a) },
-            CalculationTyp.Right,3),
-        ArcTangent("atan", {a -> atan(a) },
-            CalculationTyp.Right,3);
+        SquareRoot(
+            "√", { a -> sqrt(a) },
+            CalculationTyp.Right, 3
+        ),
+        LogarithmBaseE(
+            "ln", { a -> ln(a) },
+            CalculationTyp.Right, 3
+        ),
+        LogarithmBase10(
+            "log", { a -> log10(a) },
+            CalculationTyp.Right, 3
+        ),
+        Sine(
+            "sin", { a -> sin(a) },
+            CalculationTyp.Right, 3
+        ),
+        ArcSine(
+            "asin", { a -> asin(a) },
+            CalculationTyp.Right, 3
+        ),
+        Cosine(
+            "cos", { a -> cos(a) },
+            CalculationTyp.Right, 3
+        ),
+        ArcCosine(
+            "acos", { a -> acos(a) },
+            CalculationTyp.Right, 3
+        ),
+        Tangent(
+            "tan", { a -> tan(a) },
+            CalculationTyp.Right, 3
+        ),
+        ArcTangent(
+            "atan", { a -> atan(a) },
+            CalculationTyp.Right, 3
+        );
 
         //Input sign
         var sign: String = ""
 
         //Functions to calculate with two number operation
-        var calculationTwoNumber: ((Double, Double) -> Double) = { num1: Double, num2: Double -> num1+num2 }
+        var calculationTwoNumber: ((Double, Double) -> Double) = { num1: Double, num2: Double -> num1 + num2 }
 
         //Functions to calculate with one number operation
         var calculationOneNumber: ((Double) -> Double) = { num: Double -> num }
@@ -102,6 +117,7 @@ class StringCalculator//Set additional variable and function list
             LeftAndRight,
             Right;
         }
+
         var calculationTyp = CalculationTyp.LeftAndRight
 
         constructor(sign: String, calculation: (Double, Double) -> Double, priority: Int) {
@@ -111,7 +127,12 @@ class StringCalculator//Set additional variable and function list
             this.calculationTyp = CalculationTyp.LeftAndRight
         }
 
-        constructor(sign: String, calculationOneNumber: (Double) -> Double, calculationTyp: CalculationTyp, priority: Int) {
+        constructor(
+            sign: String,
+            calculationOneNumber: (Double) -> Double,
+            calculationTyp: CalculationTyp,
+            priority: Int
+        ) {
             this.sign = sign
             this.calculationOneNumber = calculationOneNumber
             this.priority = priority
@@ -119,40 +140,6 @@ class StringCalculator//Set additional variable and function list
         }
 
         companion object {
-            /**Loops through the given list and find the operator with the highest priority */
-            fun operatorPositionWithHighestPriority(list: MutableList<String>): Int {
-                //Start checking for functions
-                for (index in list.indices) {
-                    //Check if char at index is an operator. Do check to be sure not take a negative number as operator
-                    if (isAnyFunction(list[index], if (list[index].length > 1) 1 else 0)) {
-                        val function = getFunctionBySign(list[index])
-
-                        //Check if the priority is higher and override old one
-                        if (function != null) {
-                            return index
-                        }
-                    }
-                }
-
-                //If no functions look for the operator with the highest priority
-                var operatorIndex = 0
-                var currentHighestPriority = -1
-
-                for (index in list.indices) {
-                    //Check if char at index is an operator. Do check to be sure not take a negative number as operator
-                    if (isAnyOperator(list[index], if (list[index].length > 1) 1 else 0)) {
-                        val operator = getOperatorBySign(list[index])
-
-                        //Check if the priority is higher and override old one
-                        if (operator?.priority!! > currentHighestPriority || currentHighestPriority == -1) {
-                            currentHighestPriority = operator.priority
-                            operatorIndex = index
-                        }
-                    }
-                }
-                return operatorIndex
-            }
-
             /**Check if any valid operator is contained in [String] */
             fun isAnyOperator(parentString: String, posInParent: Int): Boolean {
                 return getOperatorBySign(getOperator(parentString, posInParent)) != null
@@ -177,7 +164,7 @@ class StringCalculator//Set additional variable and function list
                         }
                         //Loop though possible operators and find the corresponding
                         for (s in possibleOperators) {
-                            if (letters.first.contains(s)) {
+                            if (letters.first == s) {
                                 operator = s
                                 break
                             }
@@ -274,7 +261,7 @@ class StringCalculator//Set additional variable and function list
                     }
                     //Loop though possible functions and find the corresponding
                     for (s in possibleFunctions) {
-                        if (letters.first.contains(s)) {
+                        if (letters.first == s) {
                             function = s
                             break
                         }
@@ -309,7 +296,7 @@ class StringCalculator//Set additional variable and function list
      * You can also add custom variables by define the sign and the related value
      */
 
-    enum class Variables  {
+    enum class Variables {
         Pi(Variable("π", 3.141592)),
         Euler(Variable("e", 2.718281)),
         Percent(Variable("%", 0.01)),
@@ -351,18 +338,18 @@ class StringCalculator//Set additional variable and function list
                 var variable = ""
 
                 if (letters.first.isNotEmpty()) {
-                    if (Variables.isVariable(letters.first[letters.second].toString())) {
+                    if (isVariable(letters.first[letters.second].toString())) {
                         variable = letters.first[letters.second].toString()
                     } else {
                         //Add variables that containing the char at the given index
-                        for (s in Variables.getVariableSigns()) {
+                        for (s in getVariableSigns()) {
                             if (s.contains(letters.first[letters.second])) {
                                 possibleVariables.add(s)
                             }
                         }
                         //Loop though possible variables and find the corresponding
                         for (s in possibleVariables) {
-                            if (letters.first.contains(s)) {
+                            if (letters.first == s) {
                                 variable = s
                                 break
                             }
@@ -429,7 +416,7 @@ class StringCalculator//Set additional variable and function list
                     if (!string[char].toString().matches(Regex("[()0-9.]")))
                         leftLetters += string[char]
                     else {
-                        fixedIndex -= char+1
+                        fixedIndex -= char + 1
                         break
                     }
                 }
@@ -443,10 +430,38 @@ class StringCalculator//Set additional variable and function list
                         break
                 }
 
-                letters = (leftLetters+rightLetters)
+                letters = (leftLetters + rightLetters)
             }
 
             return Pair(letters, fixedIndex)
+        }
+
+        /**Returns a range of the connected letters at the given index next to each other */
+        fun getRangeOfLettersNextToEachOther(string: String, index: Int): IntRange {
+            var startIndex = index+1
+            var endIndex = index
+
+            //Only check when the character at the index is no bracket or number
+            if (!string[index].toString().matches(Regex("[()0-9.]"))) {
+
+                //Loop down until a bracket or number is found
+                for (char in index downTo 0) {
+                    if (!string[char].toString().matches(Regex("[()0-9.]")))
+                        startIndex--
+                    else
+                        break
+                }
+
+                //Loop up until a bracket or number is found
+                for (char in index + 1 until string.length) {
+                    if (!string[char].toString().matches(Regex("[()0-9.]")))
+                        endIndex++
+                    else
+                        break
+                }
+            }
+
+            return IntRange(startIndex, endIndex)
         }
     }
 
@@ -473,11 +488,6 @@ class StringCalculator//Set additional variable and function list
 
             //Add characters to list separated by operators
             calculationCharList.addAll(splitStringCalculation(fixedString))
-
-            println(calculationCharList)
-
-            //Adds necessary operation to calculation for bugfix
-            calculationCharList.addAll(mutableListOf("+", "0"))
 
             debug("Splitlist", mutableListOf(Pair("List", calculationCharList.toString())))
 
@@ -549,11 +559,11 @@ class StringCalculator//Set additional variable and function list
             val bracketResult = calculateSplitList(bracketCalculation)
 
             //Replace the bracket with the result
-            replaceElements(listToEdit, index..(index+bracketCalculation.size+1), bracketResult.toString())
+            replaceElements(listToEdit, index..(index + bracketCalculation.size + 1), bracketResult.toString())
         }
 
         //Get the index of the first operator which has the highest priority
-        val index = operatorPositionWithHighestPriority(listToEdit)
+        val index = operatorPositionWithHighestPriorityOrFunction(listToEdit)
 
         //Do the calculation in case the list is not replaced with bracket result
         result = if (listToEdit.size > 1)
@@ -681,8 +691,7 @@ class StringCalculator//Set additional variable and function list
                     )
                 }
             }
-        }
-        else if (function != null) {
+        } else if (function != null) {
             debug(listOf(Pair("Calculation type", "Functions")))
 
             val inputParameters = getFunctionParametersFromBody(list[indexOfOperatorOrFunction + 1], 0, function)
@@ -708,17 +717,23 @@ class StringCalculator//Set additional variable and function list
                 for (parameter in functionParameters) {
                     val foundParameter = getParameter(calculation, i, functionParameters)
                     if (parameter == foundParameter) {
-                        calculation = calculation.replaceRange(i, i+foundParameter.length, inputParameters[functionParameters.indexOf(parameter)])
+                        calculation = calculation.replaceRange(
+                            i,
+                            i + foundParameter.length,
+                            inputParameters[functionParameters.indexOf(parameter)]
+                        )
                     }
                 }
 
                 i++
             }
 
-            debug("Functions calculation replacement", listOf(
-                Pair("Calculation without parameter values", function.calculation),
-                Pair("Calculation with parameter values", calculation)
-            ))
+            debug(
+                "Functions calculation replacement", listOf(
+                    Pair("Calculation without parameter values", function.calculation),
+                    Pair("Calculation with parameter values", calculation)
+                )
+            )
 
             result = calculate(calculation).toDouble()
 
@@ -753,13 +768,14 @@ class StringCalculator//Set additional variable and function list
             val operator = getOperator(string, i)
 
             //Add multiplication if no operator is set for example {2 sin(2)}
-            if (i-1 >= 0 && (getOperatorBySign(operator)!!.calculationTyp == Operators.CalculationTyp.Right &&
-                        !isAnyOperator(string, i-1)))
+            if (i - 1 >= 0 && (getOperatorBySign(operator)!!.calculationTyp == Operators.CalculationTyp.Right &&
+                        !isAnyOperator(string, i - 1))
+            )
                 splitList.add(Operators.Multiply.sign)
 
             splitList.add(operator)
 
-            i += operator.length-1
+            i += operator.length - 1
         }
 
         fun addFunction() {
@@ -768,7 +784,7 @@ class StringCalculator//Set additional variable and function list
             val function = getFunction(string, i)
 
             //Add multiplication if no operator is set for example {2 add(2, 2)}
-            if (i-1 >= 0 && !isAnyOperator(string, i-1))
+            if (i - 1 >= 0 && !isAnyOperator(string, i - 1))
                 splitList.add(Operators.Multiply.sign)
 
             splitList.add(function)
@@ -782,7 +798,7 @@ class StringCalculator//Set additional variable and function list
                 val inputParameters = getFunctionParametersFromBody(string, i, functionObj)
 
                 var parameterBody = inputParameters[0]
-                for (index in 1 .. inputParameters.lastIndex) {
+                for (index in 1..inputParameters.lastIndex) {
                     parameterBody += "," + inputParameters[index]
                 }
                 parameterBody = "($parameterBody)"
@@ -806,9 +822,8 @@ class StringCalculator//Set additional variable and function list
 
                 splitList.add(functionParameter)
 
-                i += parameterBody.length-1
-            }
-            else {
+                i += parameterBody.length - 1
+            } else {
                 functionParameter += "(0"
 
                 for (parameter in getFunctionBySign(function)!!.parameters) {
@@ -819,7 +834,7 @@ class StringCalculator//Set additional variable and function list
 
                 splitList.add(functionParameter)
 
-                i += functionParameter.length-1
+                i += functionParameter.length - 1
             }
         }
 
@@ -830,7 +845,7 @@ class StringCalculator//Set additional variable and function list
             val signs = bracketCalculation.replace(Regex("[0-9]"), "")
 
             //Check if the bracket calculation is a negative number
-            if (string.length > i+1) {
+            if (string.length > i + 1) {
                 if (signs.length <= 1 && string[i + 1].toString().contains("-")) {
                     if (i - 1 >= 0 && (!isAnyOperator(string, i - 1) || string[i - 1].toString()
                             .matches(Regex("[()]")))
@@ -842,7 +857,9 @@ class StringCalculator//Set additional variable and function list
                 }
                 //Check if the bracket calculation is only one positive number
                 else if (signs.isEmpty()) {
-                    if (i-1 >= 0 && (!isAnyOperator(string, i-1) || string[i-1].toString().matches(Regex("[()]")))) {
+                    if (i - 1 >= 0 && (!isAnyOperator(string, i - 1) || string[i - 1].toString()
+                            .matches(Regex("[()]")))
+                    ) {
                         splitList.add(Operators.Multiply.sign)
                     }
 
@@ -852,7 +869,9 @@ class StringCalculator//Set additional variable and function list
                 //Else add the separated bracket content
                 else {
                     //Add multiplication if no operator is set
-                    if (i-1 >= 0 && (!isAnyOperator(string, i-1) || string[i-1].toString().matches(Regex("[()]")))) {
+                    if (i - 1 >= 0 && (!isAnyOperator(string, i - 1) || string[i - 1].toString()
+                            .matches(Regex("[()]")))
+                    ) {
                         splitList.add(Operators.Multiply.sign)
                     }
 
@@ -861,7 +880,7 @@ class StringCalculator//Set additional variable and function list
                 }
             } else {
                 //Add multiplication if no operator is set
-                if (i-1 >= 0 && (!isAnyOperator(string, i-1) || string[i-1].toString().matches(Regex("[()]")))) {
+                if (i - 1 >= 0 && (!isAnyOperator(string, i - 1) || string[i - 1].toString().matches(Regex("[()]")))) {
                     splitList.add(Operators.Add.sign)
                 }
 
@@ -875,14 +894,14 @@ class StringCalculator//Set additional variable and function list
             debug(mutableListOf(Pair("${string[i]}", "Number")))
 
             //Add multiplication if no operator is set
-            if (i-1 >= 0 && (!isAnyOperator(string, i-1) || string[i-1].toString().matches(Regex("[()]")))) {
+            if (i - 1 >= 0 && (!isAnyOperator(string, i - 1) || string[i - 1].toString().matches(Regex("[()]")))) {
                 splitList.add(Operators.Multiply.sign)
             }
 
             val h = getNumber(string, i)
 
             splitList.add(h)
-            i += h.length-1
+            i += h.length - 1
         }
 
         fun addVariable() {
@@ -891,13 +910,13 @@ class StringCalculator//Set additional variable and function list
             val variable = getVariable(string, i)
 
             //Add multiplication if no operator is set
-            if (i-1 >= 0 && (!isAnyOperator(string, i-1) || string[i-1].toString().matches(Regex("[()]")))) {
+            if (i - 1 >= 0 && (!isAnyOperator(string, i - 1) || string[i - 1].toString().matches(Regex("[()]")))) {
                 splitList.add(Operators.Multiply.sign)
             }
 
             splitList.add(Variables.getVariableValue(variable).toString())
 
-            i += variable.length-1
+            i += variable.length - 1
         }
 
         while (i < string.length) {
@@ -940,8 +959,7 @@ class StringCalculator//Set additional variable and function list
                             0
                         )
                     )?.calculationTyp == Operators.CalculationTyp.Left
-                )
-                {
+                ) {
                     if (charactersToRemove > 0) {
                         for (l in 1..charactersToRemove) splitList.removeLast()
                     }
@@ -952,7 +970,13 @@ class StringCalculator//Set additional variable and function list
             }
         }
 
-        return splitList
+        //Turn - - to + and + - to  - and - + to - and + + to +
+        var splitListString = splitList.joinToString(separator = "|").trim()
+        splitListString = splitListString.replace("-|-", "+")
+        splitListString = splitListString.replace("+|-", "-")
+        splitListString = splitListString.replace("-|+", "-")
+
+        return splitListString.split("|").map { it.trim() }.toMutableList()
     }
 
     /**Get the calculation inside a bracket with an [MutableList] of strings */
@@ -1010,9 +1034,7 @@ class StringCalculator//Set additional variable and function list
 
             if (string[char].toString().contains("(") && bracketAmount == 0) {
                 break
-            }
-
-            else if (string[char].toString().contains("(")) {
+            } else if (string[char].toString().contains("(")) {
                 bracketAmount--
             }
 
@@ -1021,26 +1043,63 @@ class StringCalculator//Set additional variable and function list
         returnStringLeft = returnStringLeft.reversed()
 
         //Loop up and add the bracket content to the right string
-        for (char in index+1 until string.length) {
+        for (char in index + 1 until string.length) {
             if (string[char].toString().contains("("))
                 bracketAmount++
 
             if (string[char].toString().contains(")") && bracketAmount == 0) {
                 break
-            }
-
-            else if (string[char].toString().contains(")")) {
+            } else if (string[char].toString().contains(")")) {
                 bracketAmount--
             }
 
             returnStringRight += string[char]
         }
 
-        return returnStringLeft+returnStringRight
+        return returnStringLeft + returnStringRight
+    }
+
+    /**Get the calculation range from a bracket with [String] */
+    fun getCalculationRangeFromBrackets(string: String, index: Int): IntRange {
+        var bracketStart = index
+        var bracketEnd = index+1
+
+        //Used to know when bracket ends and do not end earlier when other brackets contained in bracket
+        var bracketAmount = 0
+
+        //Loop down and add decrease start index value
+        for (char in index downTo 0) {
+            if (string[char].toString().contains(")"))
+                bracketAmount++
+
+            if (string[char].toString().contains("(") && bracketAmount == 0) {
+                break
+            } else if (string[char].toString().contains("(")) {
+                bracketAmount--
+            }
+
+            bracketStart--
+        }
+
+        //Loop up and add increase the end index value
+        for (char in index + 1 until string.length) {
+            if (string[char].toString().contains("("))
+                bracketAmount++
+
+            if (string[char].toString().contains(")") && bracketAmount == 0) {
+                break
+            } else if (string[char].toString().contains(")")) {
+                bracketAmount--
+            }
+
+            bracketEnd++
+        }
+
+        return IntRange(bracketStart, bracketEnd)
     }
 
     /**Returns a hole number based on one index contained in it */
-    fun getNumber (string: String, index: Int): String {
+    fun getNumber(string: String, index: Int): String {
         var numberLeft = ""
         var numberRight = ""
 
@@ -1054,17 +1113,21 @@ class StringCalculator//Set additional variable and function list
         numberLeft = numberLeft.reversed()
 
         //Loop up and add all characters that are a number to the right string
-        for (char in index+1 until string.length) {
+        for (char in index + 1 until string.length) {
             if (string[char].toString().matches(Regex("[0-9.]")))
                 numberRight += string[char]
             else
                 break
         }
-        return (numberLeft+numberRight).replace(Regex("\\s"), "")
+        return (numberLeft + numberRight).replace(Regex("\\s"), "")
     }
 
     /**Returns a list of parameters of a passed function and function body */
-    private fun getFunctionParametersFromBody(string: String, startIndex: Int, function: Function): MutableList<String> {
+    private fun getFunctionParametersFromBody(
+        string: String,
+        startIndex: Int,
+        function: Function
+    ): MutableList<String> {
         val funParameters = function.parameters
         val inputParameters = mutableListOf<String>()
 
@@ -1083,7 +1146,7 @@ class StringCalculator//Set additional variable and function list
                 while (!reachedParameterEnd) {
                     if (isAnyFunction(string, i)) {
                         val funAtI = getFunctionBySign(getFunction(string, i))
-                        commasToIgnore += funAtI!!.parameters.size-1
+                        commasToIgnore += funAtI!!.parameters.size - 1
                         parameter += funAtI.sign
                         i += funAtI.sign.length
                         continue
@@ -1172,16 +1235,52 @@ class StringCalculator//Set additional variable and function list
         return parameter
     }
 
+    /**Loops through the given list and find the operator with the highest priority or a function */
+    fun operatorPositionWithHighestPriorityOrFunction(list: MutableList<String>): Int {
+        //Start checking for functions
+        for (index in list.indices) {
+            //Check if char at index is an operator. Do check to be sure not take a negative number as operator
+            if (isAnyFunction(list[index], if (list[index].length > 1) 1 else 0)) {
+                val function = getFunctionBySign(list[index])
+
+                //Check if the priority is higher and override old one
+                if (function != null) {
+                    return index
+                }
+            }
+        }
+
+        //If no functions look for the operator with the highest priority
+        var operatorIndex = 0
+        var currentHighestPriority = -1
+
+        for (index in list.indices) {
+            //Check if char at index is an operator. Do check to be sure not take a negative number as operator
+            if (isAnyOperator(list[index], if (list[index].length > 1) 1 else 0)) {
+                val operator = getOperatorBySign(list[index])
+
+                //Check if the priority is higher and override old one
+                if (operator?.priority!! > currentHighestPriority || currentHighestPriority == -1) {
+                    currentHighestPriority = operator.priority
+                    operatorIndex = index
+                }
+            }
+        }
+        return operatorIndex
+    }
+
     /**Replaces a range of elements with one element of typ [E] */
     private fun <E> replaceElements(list: MutableList<E>, indexBounds: IntRange, element: E): MutableList<E> {
         val indexesToRemove: MutableList<Int> = indexBounds.toMutableList()
         val firstIndex = indexBounds.first
 
         //region For debug
+
         val oldList = list.toMutableList()
-        if (oldList[oldList.size-1].toString() == "0" && oldList[oldList.size-2].toString() == "+") {
-            for (i in 0..1) oldList.removeAt(oldList.size-1)
+        if (oldList[oldList.size - 1].toString() == "0" && oldList[oldList.size - 2].toString() == "+") {
+            for (i in 0..1) oldList.removeAt(oldList.size - 1)
         }
+
         //endregion
 
         //Remove the first index
@@ -1189,7 +1288,7 @@ class StringCalculator//Set additional variable and function list
 
         //Removes all elements except for the first one
         for ((a, index) in indexesToRemove.withIndex()) {
-            if (list.size > index-a) {
+            if (list.size > index - a) {
                 list.removeAt(index - a)
             }
         }
@@ -1199,8 +1298,8 @@ class StringCalculator//Set additional variable and function list
 
         //region For debug
         val newList = list.toMutableList()
-        if (newList[newList.size-1].toString() == "0" && newList[newList.size-2].toString() == "+") {
-            for (i in 0..1) newList.removeAt(newList.size-1)
+        if (newList[newList.size - 1].toString() == "0" && newList[newList.size - 2].toString() == "+") {
+            for (i in 0..1) newList.removeAt(newList.size - 1)
         }
         //endregion
 

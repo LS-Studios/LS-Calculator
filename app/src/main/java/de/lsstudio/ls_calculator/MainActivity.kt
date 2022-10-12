@@ -652,7 +652,7 @@ class MainActivity : ThemeActivity() {
         }
     }
 
-    private fun subCalculate(view: View) {
+    private fun subCalculate() {
         val calculationTextView: EditText = binding.calculationText
 
         val calculationText: String = calculationTextView.text.toString()
@@ -680,7 +680,7 @@ class MainActivity : ThemeActivity() {
 
         addStringAtSelection(button.text.toString())
 
-        subCalculate(view)
+        subCalculate()
     }
 
     fun addDot(view: View) {
@@ -698,7 +698,7 @@ class MainActivity : ThemeActivity() {
             addStringAtSelection(".")
         }
 
-        subCalculate(view)
+        subCalculate()
     }
 
     fun addAns(view: View) {
@@ -712,47 +712,17 @@ class MainActivity : ThemeActivity() {
         if (calculationTextView.text.matches((Regex("Ans"))))
             resultTextView.text = StringCalculator.Variables.Ans.variable.value.toString()
 
-        subCalculate(view)
+        subCalculate()
     }
 
     fun addBracket(view: View) {
         val calculationTextView: EditText = binding.calculationText
 
-        var calculationText: String = calculationTextView.text.toString()
-
         val cursorPosition= calculationTextView.selectionStart
 
-        //Returns the bracket to place based on the opened and closed ones in the calculation
-        fun getBracketToPlace(): String {
-            var bracketAmmount = 0
+        addStringAtSelectionAndSelectOffset("()", cursorPosition+1)
 
-            for (char in calculationText) {
-                if (char == "(".first()) {
-                    bracketAmmount++
-                } else if (char == ")".first()) {
-                    bracketAmmount--
-                }
-            }
-
-            return if (bracketAmmount > 0)
-                ")"
-            else
-                "("
-        }
-
-        if (calculationText.isNotEmpty()) {
-            if (cursorPosition== 0)
-                addStringAtSelection("(")
-            else if (calculationText[cursorPosition-1].toString().contains("("))
-                addStringAtSelection("(")
-            else
-                addStringAtSelection(getBracketToPlace())
-        }
-        else {
-            addStringAtSelection("(")
-        }
-
-        subCalculate(view)
+        subCalculate()
     }
 
     //endregion
@@ -775,7 +745,7 @@ class MainActivity : ThemeActivity() {
                 }
                 addStringAtSelection(button.text.toString())
 
-                subCalculate(view)
+                subCalculate()
             }
             else if (!calculationTextView.text[calculationTextView.selectionStart
                         - 1].toString().contains("(")) {
@@ -784,12 +754,12 @@ class MainActivity : ThemeActivity() {
                 }
                 addStringAtSelection(button.text.toString())
 
-                subCalculate(view)
+                subCalculate()
             }
         } else if (button.text == "-") {
             addStringAtSelection(button.text.toString())
 
-            subCalculate(view)
+            subCalculate()
         }
     }
 
@@ -804,27 +774,20 @@ class MainActivity : ThemeActivity() {
         if (calculationText.isNotEmpty()) {
             addStringAtSelection(button.text.toString())
 
-            subCalculate(view)
+            subCalculate()
         } else {
             addStringAtSelection(button.text.toString())
         }
     }
 
     fun addRightOperator(view: View) {
-        val calculationTextView: EditText = binding.calculationText
-
         val button: Button = view as Button
 
-        var calculationText: String = calculationTextView.text.toString()
+        val operator = button.text.toString()
 
-        //Delete last operator if there is one
-        if (calculationText.isNotEmpty()) {
-            addStringAtSelection(button.text.toString())
+        addStringAtSelectionAndSelectOffset("$operator()", operator.length+1)
 
-            subCalculate(view)
-        } else {
-            addStringAtSelection(button.text.toString())
-        }
+        subCalculate()
     }
 
     //endregion
@@ -855,44 +818,76 @@ class MainActivity : ThemeActivity() {
         var rightSide = oldString.substring(cursorPosition)
 
         calculationTextView.setText(String.format("%s%s%s", leftSide, stringToAdd, rightSide))
-        calculationTextView.setSelection(selectionWithOffset)
+        calculationTextView.setSelection(cursorPosition+selectionWithOffset)
     }
 
     //region Methods to delete
     fun deleteChar(view: View) {
+        deleteChar(-1)
+    }
+
+    //region Methods to delete
+    fun deleteChar(pos: Int = -1) {
         val calculationTextView: EditText = binding.calculationText
 
         var calculationText: String = calculationTextView.text.toString()
 
         if (calculationText.isNotEmpty()) {
-            val cursorPosition = calculationTextView.selectionStart
+            var cursorPosition = calculationTextView.selectionStart
 
-            val selectionEnd = calculationTextView.selectionEnd
+            var selectionEnd = calculationTextView.selectionEnd
+
+            if (pos != -1) {
+                cursorPosition = pos
+                selectionEnd = pos
+            }
 
             //Cursor is just at one position
             if (cursorPosition == selectionEnd && cursorPosition-1 >= 0) {
-                val variable = StringCalculator.Variables.getVariable(calculationText, cursorPosition-1)
-                val operator = StringCalculator.Variables.getVariable(calculationText, cursorPosition-1)
-                val function = StringCalculator.Variables.getVariable(calculationText, cursorPosition-1)
+                //Left char is bracket or ,
+                if (calculationText[cursorPosition-1].toString().matches(Regex("[,()]"))) {
+                    var bracketLength = calculator.getCalculationRangeFromBrackets(calculationText, cursorPosition-2)
 
-                if (variable != "") {
-                    //Check if the char to delete is a variable and if so remove the hole variable
+                    if (calculationText[cursorPosition-1].toString() == "(")
+                        bracketLength = calculator.getCalculationRangeFromBrackets(calculationText, cursorPosition-1)
+
+                    //Remove brackets
                     calculationText =
-                        calculationText.removeRange(cursorPosition - variable.length, selectionEnd)
+                        calculationText.removeRange(bracketLength.first, bracketLength.last+1)
 
                     calculationTextView.setText(calculationText)
 
-                    calculationTextView.setSelection(cursorPosition - variable.length)
-                }
-                else {
-                    var funPos = cursorPosition - 3 - calculator.getCalculationInsideBrackets(calculationText, cursorPosition - 2).length
-//                    val function = StringCalculator.Functions.getFunction(calculationText, funPos)
-//                    println("------------------")
-//                    println(cursorPosition-2)
-//                    println(selectionEnd)
-//                    println("------------------")
-//                    funPos -= function.length+2
+                    calculationTextView.setSelection(bracketLength.first)
 
+                    //Delete function or operator if there left value is letter
+                    try {
+                        if (calculationText[calculationTextView.selectionStart-1].toString().matches(Regex("[a-zA-Z]")))
+                            deleteChar()
+                    } catch (e: Exception) {
+
+                    }
+                }
+
+                //Check if the char to delete is letter and if so remove the hole word
+                else if (calculationText[cursorPosition-1].toString().matches(Regex("[a-zA-Z]"))) {
+                    val wordRange = StringCalculator.getRangeOfLettersNextToEachOther(calculationText, cursorPosition - 1)
+
+                    val operator = StringCalculator.Operators.getOperator(calculationText, cursorPosition-1)
+                    val function = StringCalculator.Functions.getFunction(calculationText, cursorPosition-1)
+
+                    calculationText =
+                        calculationText.removeRange(wordRange.first, wordRange.last+1)
+
+                    calculationTextView.setText(calculationText)
+
+                    calculationTextView.setSelection(wordRange.first)
+
+                    if ((operator != "" || function != "") && (calculationText.length > calculationTextView.selectionStart && calculationText[calculationTextView.selectionStart] == '('))
+                        deleteChar(calculationTextView.selectionStart+1)
+                }
+
+                //Left char is a anything else
+                else {
                     calculationText =
                         calculationText.removeRange(cursorPosition-1, selectionEnd)
 
@@ -901,17 +896,21 @@ class MainActivity : ThemeActivity() {
                     calculationTextView.setSelection(cursorPosition - 1)
                 }
             }
-            //There is an selection
+            //There is a selection
             else if (cursorPosition != selectionEnd) {
-                calculationText = calculationText.removeRange(cursorPosition, selectionEnd)
+                    calculationText = calculationText.removeRange(cursorPosition, selectionEnd)
 
-                calculationTextView.setText(calculationText)
+                    calculationTextView.setText(calculationText)
 
-                calculationTextView.setSelection(cursorPosition)
-            }
+                    calculationTextView.setSelection(cursorPosition)
+
+                    subCalculate()
+
+                    return
+                }
         }
 
-        subCalculate(view)
+        subCalculate()
     }
 
     fun deleteAll(view: View) {
