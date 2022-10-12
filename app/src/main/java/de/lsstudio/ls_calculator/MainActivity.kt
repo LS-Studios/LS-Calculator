@@ -393,6 +393,11 @@ class MainActivity : ThemeActivity() {
                     return@setOnClickListener
                 }
 
+                if (nameEditText.text.toString().contains(" ")) {
+                    Toast.makeText(this, "Please enter a variable name that do not contain spaces!", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 //Add variable to local data
                 val newCustoms = LocalDataHelper.getCustoms(this).toMutableList()
                 val newCustom = Custom(
@@ -577,6 +582,11 @@ class MainActivity : ThemeActivity() {
             continueBtn.setOnClickListener {
                 if (nameEditText.text.toString().isEmpty()) {
                     Toast.makeText(this, "Please enter a name for the function!", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (nameEditText.text.toString().contains(" ")) {
+                    Toast.makeText(this, "Please enter a function name that do not contain spaces!", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
@@ -805,6 +815,8 @@ class MainActivity : ThemeActivity() {
         calculationTextView.setText(String.format("%s%s%s", leftSide, stringToAdd, rightSide))
         calculationTextView.setSelection(cursorPosition
                 +stringToAdd.length)
+
+        subCalculate()
     }
 
     //Method to add a string at the selected cursor position and select something in range starting at the added string start
@@ -819,6 +831,8 @@ class MainActivity : ThemeActivity() {
 
         calculationTextView.setText(String.format("%s%s%s", leftSide, stringToAdd, rightSide))
         calculationTextView.setSelection(cursorPosition+selectionWithOffset)
+
+        subCalculate()
     }
 
     //region Methods to delete

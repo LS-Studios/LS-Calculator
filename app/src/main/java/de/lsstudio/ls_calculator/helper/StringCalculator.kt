@@ -147,7 +147,7 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
 
             /**Returns an operator based on one index contained in it */
             fun getOperator(string: String, index: Int): String {
-                val letters = getListOfLettersNextToEachOther(string, index)
+                val letters = getListOfLettersNextToEachOther(string, index, true)
 
                 val possibleOperators = mutableListOf<String>()
                 var operator = ""
@@ -327,10 +327,10 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
 
             /**Check if any valid variable is contained in [String] */
             fun isAnyVariable(parentString: String, posInParent: Int): Boolean {
-                return getVariableValue(getVariable(parentString, posInParent)) != null
+                return getVariableBySign(getVariable(parentString, posInParent)) != null
             }
 
-            /**Returns an variable based on one index contained in it */
+            /**Returns a variable based on one index contained in it */
             fun getVariable(string: String, index: Int): String {
                 val letters = getListOfLettersNextToEachOther(string, index)
 
@@ -338,11 +338,11 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
                 var variable = ""
 
                 if (letters.first.isNotEmpty()) {
-                    if (isVariable(letters.first[letters.second].toString())) {
+                    if (Variables.isVariable(letters.first[letters.second].toString())) {
                         variable = letters.first[letters.second].toString()
                     } else {
                         //Add variables that containing the char at the given index
-                        for (s in getVariableSigns()) {
+                        for (s in Variables.getAllVariableSigns()) {
                             if (s.contains(letters.first[letters.second])) {
                                 possibleVariables.add(s)
                             }
@@ -361,14 +361,14 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
             }
 
             /**Loops through the values and return the value that is containing the given sign */
-            fun getVariableValue(string: String): Double? {
+            fun getVariableBySign(sign: String): Double? {
                 for (variable in values()) {
-                    if (variable.variable.sign == string) {
+                    if (variable.variable.sign == sign) {
                         return variable.variable.value
                     }
                 }
                 for (variable in additionalVariables) {
-                    if (variable.sign == string) {
+                    if (variable.sign == sign) {
                         return variable.value
                     }
                 }
@@ -377,7 +377,7 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
             }
 
             /**Return a list of all variables signs */
-            fun getVariableSigns(): MutableList<String> {
+            fun getAllVariableSigns(): MutableList<String> {
                 val variableSignList = mutableListOf<String>()
 
                 for (variable in values()) {
@@ -401,7 +401,7 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
         private var additionalFunctions = mutableListOf<Function>()
 
         /**Returns an [String] of letters which are around the given index next to each other */
-        private fun getListOfLettersNextToEachOther(string: String, index: Int): Pair<String, Int> {
+        private fun getListOfLettersNextToEachOther(string: String, index: Int, withNonLetterOperators: Boolean = false): Pair<String, Int> {
             var leftLetters = ""
             var rightLetters = ""
 
@@ -409,11 +409,13 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
             var fixedIndex = index
 
             //Only check when the character at the index is no bracket or number
-            if (!string[index].toString().matches(Regex("[()0-9.]"))) {
+            if (!string[index].toString().matches(Regex("[()0-9.]")) && (withNonLetterOperators ||
+                        Operators.getAllOperatorSigns().find { sign -> !sign.matches(Regex("^[a-zA-Z]*\$")) && sign.first() == string[index] } == null)) {
 
                 //Loop down until a bracket or number is found
                 for (char in index downTo 0) {
-                    if (!string[char].toString().matches(Regex("[()0-9.]")))
+                    if (!string[char].toString().matches(Regex("[()0-9.]")) && (withNonLetterOperators ||
+                                Operators.getAllOperatorSigns().find { sign -> !sign.matches(Regex("^[a-zA-Z]*\$")) && sign.first() == string[char] } == null))
                         leftLetters += string[char]
                     else {
                         fixedIndex -= char + 1
@@ -424,7 +426,8 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
 
                 //Loop up until a bracket or number is found
                 for (char in index + 1 until string.length) {
-                    if (!string[char].toString().matches(Regex("[()0-9.]")))
+                    if (!string[char].toString().matches(Regex("[()\\d.]")) && (withNonLetterOperators ||
+                                Operators.getAllOperatorSigns().find { sign -> !sign.matches(Regex("^[a-zA-Z]*\$")) && sign.first() == string[char] } == null))
                         rightLetters += string[char]
                     else
                         break
@@ -442,11 +445,13 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
             var endIndex = index
 
             //Only check when the character at the index is no bracket or number
-            if (!string[index].toString().matches(Regex("[()0-9.]"))) {
+            if (!string[index].toString().matches(Regex("[()0-9.]")) &&
+                Operators.getAllOperatorSigns().find { sign -> !sign.matches(Regex("^[a-zA-Z]*\$")) && sign.first() == string[index] } == null) {
 
                 //Loop down until a bracket or number is found
                 for (char in index downTo 0) {
-                    if (!string[char].toString().matches(Regex("[()0-9.]")))
+                    if (!string[char].toString().matches(Regex("[()0-9.]")) &&
+                        Operators.getAllOperatorSigns().find { sign -> !sign.matches(Regex("^[a-zA-Z]*\$")) && sign.first() == string[char] } == null)
                         startIndex--
                     else
                         break
@@ -454,7 +459,8 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
 
                 //Loop up until a bracket or number is found
                 for (char in index + 1 until string.length) {
-                    if (!string[char].toString().matches(Regex("[()0-9.]")))
+                    if (!string[char].toString().matches(Regex("[()0-9.]")) &&
+                        Operators.getAllOperatorSigns().find { sign -> !sign.matches(Regex("^[a-zA-Z]*\$")) && sign.first() == string[char] } == null)
                         endIndex++
                     else
                         break
@@ -529,6 +535,8 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
                 return calculationCharList[0]
             }
         } catch (e: Exception) {
+            if (debug)
+                e.printStackTrace()
             debug(errorMessage, mutableListOf(Pair("Error", e.toString())))
 
             return errorMessage
@@ -914,7 +922,7 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
                 splitList.add(Operators.Multiply.sign)
             }
 
-            splitList.add(Variables.getVariableValue(variable).toString())
+            splitList.add(Variables.getVariableBySign(variable).toString())
 
             i += variable.length - 1
         }
@@ -930,6 +938,11 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
                 addFunction()
             }
 
+            //Char at i is a variable
+            else if (isAnyVariable(string, i)) {
+                addVariable()
+            }
+
             //Char at i is a bracket
             else if (string[i].toString().matches(Regex("[()]"))) {
                 addBracket()
@@ -938,11 +951,6 @@ class StringCalculator(newAdditionalVariables: List<Variable> = mutableListOf(),
             //Char at i is a number
             else if (string[i].toString().matches(Regex("[0-9]"))) {
                 addNumber()
-            }
-
-            //Char at i is a variable
-            else if (isAnyVariable(string, i)) {
-                addVariable()
             }
 
             i++
