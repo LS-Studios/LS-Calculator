@@ -728,9 +728,7 @@ class MainActivity : ThemeActivity() {
     fun addBracket(view: View) {
         val calculationTextView: EditText = binding.calculationText
 
-        val cursorPosition= calculationTextView.selectionStart
-
-        addStringAtSelectionAndSelectOffset("()", cursorPosition+1)
+        addStringAtSelectionAndSelectOffset("()", 1)
 
         subCalculate()
     }
@@ -820,7 +818,7 @@ class MainActivity : ThemeActivity() {
     }
 
     //Method to add a string at the selected cursor position and select something in range starting at the added string start
-    fun addStringAtSelectionAndSelectOffset(stringToAdd: String, selectionWithOffset: Int) {
+    fun addStringAtSelectionAndSelectOffset(stringToAdd: String, offsetFromCurrentSelection: Int) {
         val calculationTextView: EditText = binding.calculationText
 
         val cursorPosition = calculationTextView.selectionStart
@@ -830,7 +828,10 @@ class MainActivity : ThemeActivity() {
         var rightSide = oldString.substring(cursorPosition)
 
         calculationTextView.setText(String.format("%s%s%s", leftSide, stringToAdd, rightSide))
-        calculationTextView.setSelection(cursorPosition+selectionWithOffset)
+
+        calculationTextView.setSelection(cursorPosition+offsetFromCurrentSelection)
+
+        println(cursorPosition)
 
         subCalculate()
     }
