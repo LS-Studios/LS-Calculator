@@ -3,6 +3,11 @@
         <item name="android:itemBackground">@color/bright_main_2</item>
         <item name="actionOverflowMenuStyle">@style/Theme.MyTaschenrechner.Bright.PopUpBG</item>
         <item name="actionOverflowButtonStyle">@style/Theme.MyTaschenrechner.Bright.PopUpIcon</item>
+        <item name="listMenuViewStyle">@style/Theme.MyTaschenrechner.Bright.ListMenuViewStyle</item>
+    </style>
+
+    <style name="Theme.MyTaschenrechner.Bright.ListMenuViewStyle" parent="Base.Widget.AppCompat.ListMenuView">
+        <item name="subMenuArrow">@drawable/ic_menu_arrow_bright_theme</item>
     </style>
 
     <style name="Theme.MyTaschenrechner.Bright.PopUpBG" parent="Theme.MaterialComponents.NoActionBar">

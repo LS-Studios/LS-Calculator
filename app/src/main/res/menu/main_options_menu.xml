@@ -13,5 +13,17 @@
         app:showAsAction="never" />
     <item android:id="@+id/themeButton"
         android:title="Change theme"
-        app:showAsAction="never" />
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/brightThemeButton"
+                android:title="Bright"
+                app:showAsAction="never" />
+            <item android:id="@+id/darkThemeButton"
+                android:title="Dark"
+                app:showAsAction="never" />
+            <item android:id="@+id/systemThemeButton"
+                android:title="System"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>

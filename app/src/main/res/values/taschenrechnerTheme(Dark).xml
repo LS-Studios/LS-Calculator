@@ -3,12 +3,17 @@
         <item name="android:itemBackground">@color/dark_main_2</item>
         <item name="actionOverflowMenuStyle">@style/Theme.MyTaschenrechner.Dark.PopUpBG</item>
         <item name="actionOverflowButtonStyle">@style/Theme.MyTaschenrechner.Dark.PopUpIcon</item>
+        <item name="listMenuViewStyle">@style/Theme.MyTaschenrechner.Dark.ListMenuViewStyle</item>
+    </style>
+
+    <style name="Theme.MyTaschenrechner.Dark.ListMenuViewStyle" parent="Base.Widget.AppCompat.ListMenuView">
+        <item name="subMenuArrow">@drawable/ic_menu_arrow_dark_theme</item>
     </style>
 
     <style name="Theme.MyTaschenrechner.Dark.PopUpBG" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:popupBackground">@drawable/options_menu_dark</item>
         <item name="overlapAnchor">false</item>
-        <item name="android:overlapAnchor" tools:ignore="NewApi">false</item>
+        <item name="android:overlapAnchor" tools:ignore="NewApi">false</item>W
         <item name="android:dropDownVerticalOffset">-50dip</item>
     </style>
 

@@ -2,6 +2,7 @@ package de.lsstudio.ls_calculator.helper
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
@@ -64,6 +65,13 @@ class LocalDataHelper() {
             return when (sharedPreferences.getInt(THEME, 0)) {
                 0 -> BrightTheme(context)
                 1 -> DarkTheme(context)
+                2 -> {
+                    when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                        Configuration.UI_MODE_NIGHT_YES -> DarkTheme(context)
+                        Configuration.UI_MODE_NIGHT_NO -> BrightTheme(context)
+                        else -> BrightTheme(context)
+                    }
+                }
                 else -> BrightTheme(context)
             }
         }

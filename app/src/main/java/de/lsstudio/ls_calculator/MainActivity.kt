@@ -3,6 +3,7 @@ package de.lsstudio.ls_calculator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import androidx.core.view.children
+import androidx.core.view.iterator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dolatkia.animatedThemeManager.AppTheme
@@ -94,9 +97,8 @@ class MainActivity : ThemeActivity() {
         }
     }
 
-    fun updateMenuItems(menu: Menu, itemCount: Int) {
-        repeat(itemCount-1) {
-            val item = menu.getItem(it)
+    fun updateMenuItems(menu: Menu) {
+        fun updateItem(item: MenuItem) {
             val s = SpannableString(item.title)
 
             val myTheme = ThemeManager.instance.getCurrentTheme() as MyAppTheme
@@ -105,22 +107,14 @@ class MainActivity : ThemeActivity() {
             item.title = s
         }
 
-        val item = menu.getItem(itemCount-1)
-
-        val myTheme = ThemeManager.instance.getCurrentTheme() as MyAppTheme
-
-        val text = if (myTheme is BrightTheme) {
-            "Change to dark theme"
-        } else
-            "Change to bright theme"
-
-        var s = SpannableString(text)
-
-        if (intent.getIntExtra("state", 0) == 1)
-            s = SpannableString(item.title)
-
-        s.setSpan(ForegroundColorSpan(myTheme.textColor()), 0, s.length, 0)
-        item.title = s
+        for (item in menu.children) {
+            updateItem(item)
+            if (item.hasSubMenu()) {
+                for (subItem in item.subMenu) {
+                    updateItem(subItem)
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -130,11 +124,11 @@ class MainActivity : ThemeActivity() {
 
         if (state == 0) {
             menuInflater.inflate(R.menu.main_options_menu, menu)
-            updateMenuItems(menu, 4)
+            updateMenuItems(menu)
         }
         else {
             menuInflater.inflate(R.menu.create_function_options_menu, menu)
-            updateMenuItems(menu, 2)
+            updateMenuItems(menu)
         }
 
         return true
@@ -143,7 +137,9 @@ class MainActivity : ThemeActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.historyButton -> showHistory()
-            R.id.themeButton -> changeTheme()
+            R.id.brightThemeButton -> changeTheme(0)
+            R.id.darkThemeButton -> changeTheme(1)
+            R.id.systemThemeButton -> changeTheme(2)
             R.id.newVariableButton -> createNewVariable()
             R.id.newFunctionButton -> createNewFunction()
             R.id.cancel -> {
@@ -335,19 +331,23 @@ class MainActivity : ThemeActivity() {
         }
     }
 
-    private fun changeTheme() {
-        val myTheme = ThemeManager.instance.getCurrentTheme()
-
-        if (myTheme is BrightTheme) {
-            ThemeManager.instance.changeTheme(DarkTheme(this), binding.toolBar)
-            LocalDataHelper.saveTheme(this, 1)
+    private fun changeTheme(type: Int) {
+        when (type) {
+            0 -> ThemeManager.instance.changeTheme(BrightTheme(this), binding.toolBar)
+            1 -> ThemeManager.instance.changeTheme(DarkTheme(this), binding.toolBar)
+            2 -> {
+                ThemeManager.instance.changeTheme(
+                    when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                        Configuration.UI_MODE_NIGHT_YES -> DarkTheme(this)
+                        Configuration.UI_MODE_NIGHT_NO -> BrightTheme(this)
+                        else -> BrightTheme(this)
+                }, binding.toolBar)
+            }
         }
-        else {
-            ThemeManager.instance.changeTheme(BrightTheme(this), binding.toolBar)
-            LocalDataHelper.saveTheme(this, 0)
-        }
 
-        updateMenuItems(binding.toolBar.menu, 4)
+        LocalDataHelper.saveTheme(this, type)
+
+        updateMenuItems(binding.toolBar.menu)
 
         Handler(Looper.getMainLooper()).postDelayed(
             {
